@@ -35,7 +35,11 @@ namespace SourceGit.Views
         public Launcher()
         {
             if (OperatingSystem.IsMacOS())
-                CaptionHeight = new GridLength(34);
+            {
+                // Native macOS title bar (like SmartGit) instead of the custom caption row.
+                ExtendClientAreaToDecorationsHint = false;
+                CaptionHeight = new GridLength(0);
+            }
             else if (UseSystemWindowFrame)
                 CaptionHeight = new GridLength(30);
             else

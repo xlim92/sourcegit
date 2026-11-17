@@ -38,6 +38,11 @@ namespace SourceGit.ViewModels
             set => SetProperty(ref _commandPalette, value);
         }
 
+        public RepositorySidebar Sidebar
+        {
+            get;
+        }
+
         public Models.Version NewVersion
         {
             get => _newVersion;
@@ -51,6 +56,7 @@ namespace SourceGit.ViewModels
 
             ActiveWorkspace = Preferences.Instance.GetActiveWorkspace();
             Pages = new AvaloniaList<LauncherPage>();
+            Sidebar = new RepositorySidebar(this);
             AddNewTab();
 
             var repos = ActiveWorkspace.Repositories.ToArray();

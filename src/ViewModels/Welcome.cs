@@ -50,6 +50,7 @@ namespace SourceGit.ViewModels
             MakeTreeRows(rows, Preferences.Instance.RepositoryNodes);
             Rows.Clear();
             Rows.AddRange(rows);
+            RepositorySidebar.Instance?.Refresh();
         }
 
         public async Task UpdateStatusAsync(bool force, CancellationToken? token)

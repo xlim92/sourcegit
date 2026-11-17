@@ -183,6 +183,51 @@ namespace SourceGit.Views
             }
         }
 
+        private async void Sync(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is not ViewModels.Repository repo)
+                return;
+
+            e.Handled = true;
+            await repo.PullAsync(true);
+            if (App.GetLauncher().ActivePage?.Popup == null)
+                await repo.PushAsync(true);
+        }
+
+        private async void FetchAll(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is not ViewModels.Repository repo || !repo.CanCreatePopup())
+                return;
+
+            e.Handled = true;
+            if (repo.Remotes.Count == 0)
+            {
+                await repo.FetchAsync(false);
+                return;
+            }
+
+            var keepDefault = repo.UIStates.FetchAllRemotes;
+            var fetch = new ViewModels.Fetch(repo) { FetchAllRemotes = true };
+            repo.UIStates.FetchAllRemotes = keepDefault;
+            await repo.ShowAndStartPopupAsync(fetch);
+        }
+
+        private void ShowCommit(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ViewModels.Repository repo)
+                repo.SelectedViewIndex = 1;
+
+            e.Handled = true;
+        }
+
+        private void ShowConflicts(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ViewModels.Repository repo)
+                repo.SelectedViewIndex = 1;
+
+            e.Handled = true;
+        }
+
         private async void Pull(object sender, TappedEventArgs e)
         {
             if (DataContext is ViewModels.Repository repo)

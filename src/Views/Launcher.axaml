@@ -113,7 +113,7 @@
       </Button>
 
       <!-- Pages Switcher Toggle Button -->
-      <Button Grid.Column="2" Classes="icon_button" VerticalAlignment="Bottom" Margin="0,0,0,1" Click="OnOpenPagesCommandPalette" HotKey="{OnPlatform Ctrl+P, macOS=⌘+P}">
+      <Button Grid.Column="2" Classes="icon_button" IsVisible="False" VerticalAlignment="Bottom" Margin="0,0,0,1" Click="OnOpenPagesCommandPalette" HotKey="{OnPlatform Ctrl+P, macOS=⌘+P}">
         <ToolTip.Tip>
           <StackPanel Orientation="Horizontal">
             <TextBlock Text="{DynamicResource Text.Launcher.Pages}"
@@ -129,7 +129,13 @@
       </Button>
 
       <!-- Pages Tabs -->
-      <v:LauncherTabBar Grid.Column="3" Height="30" Margin="0,0,16,0" VerticalAlignment="Bottom"/>
+      <v:LauncherTabBar Grid.Column="3" Height="30" Margin="0,0,16,0" VerticalAlignment="Bottom" IsVisible="False"/>
+      <TextBlock Grid.Column="3"
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontWeight="Bold"
+                 IsHitTestVisible="False"
+                 TextTrimming="CharacterEllipsis"
+                 Text="{Binding ActivePage.Node.Name, FallbackValue=''}"/>
 
       <!-- Update Available Button -->
       <Button Grid.Column="4"

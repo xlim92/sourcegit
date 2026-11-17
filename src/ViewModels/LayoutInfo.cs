@@ -77,6 +77,13 @@ namespace SourceGit.ViewModels
             set => SetProperty(ref _commitDetailFilesLeftWidth, value);
         }
 
+        public GridLength RepositoryListHeight
+        {
+            get => _repositoryListHeight;
+            set => SetProperty(ref _repositoryListHeight, value);
+        }
+
+        private GridLength _repositoryListHeight = new GridLength(200, GridUnitType.Pixel);
         private GridLength _workingCopyLeftWidth = new GridLength(300, GridUnitType.Pixel);
         private GridLength _stashesLeftWidth = new GridLength(300, GridUnitType.Pixel);
         private GridLength _commitDetailChangesLeftWidth = new GridLength(256, GridUnitType.Pixel);
